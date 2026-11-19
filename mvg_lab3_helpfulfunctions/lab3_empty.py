@@ -28,7 +28,7 @@ def main():
     wt1c = np.zeros(3)
 
     # Note: ************** You have to add your own code from here onward ************
-    K2 = np.array([[au2, 0, uo2], [0, av2, vo2], [0, 0, 1]])
+    K2 = np.array([[au2, 0, uo2], [0, av2, vo2], [0, 0, 1]], float)
     #wR2c = np.array([ax, by, cz])
 
     Rx = np.array([
@@ -60,9 +60,10 @@ def main():
     # Step 4 
     # Attention: This is an invented matrix just to have some input for the drawing functions. You have to compute it properly
 
+    
     t_skew = np.array([
         [0, -tz, ty],
-        [tz, 0, 0],
+        [tz, 0, -tx],
         [-ty, tx, 0]
     ])
 
