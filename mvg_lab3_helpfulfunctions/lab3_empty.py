@@ -59,9 +59,25 @@ def main():
 
     # Step 4 
     # Attention: This is an invented matrix just to have some input for the drawing functions. You have to compute it properly
+
+    t_skew = np.array([
+        [0, -tz, ty],
+        [tz, 0, 0],
+        [-ty, tx, 0]
+    ])
+
+    F = (
+        np.linalg.inv(K2).T
+        @ wR2c.T
+        @ t_skew
+        @ np.linalg.inv(K1)
+    )
+
+    '''
     F = np.array([[3e-05, 7e-05, -0.006],
                   [2e-05, -2e-05, 0.01],
                   [-0.009, -0.01, 1]], float)
+    '''
     F /= F[2, 2]
     print("Step 4: Analytically obtained F:\n", F)
 
