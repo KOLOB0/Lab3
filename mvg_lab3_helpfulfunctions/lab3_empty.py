@@ -28,12 +28,34 @@ def main():
     wt1c = np.zeros(3)
 
     # Note: ************** You have to add your own code from here onward ************
-    K2 = np.array([])
-    wR2c = np.array([])
-    wt2c = np.array([])
+    K2 = np.array([[au2, 0, uo2], [0, av2, vo2], [0, 0, 1]])
+    #wR2c = np.array([ax, by, cz])
+
+    Rx = np.array([
+    [1, 0,          0],
+    [0, np.cos(ax), -np.sin(ax)],
+    [0, np.sin(ax),  np.cos(ax)]
+    ])
+
+    Ry = np.array([
+        [ np.cos(by), 0, np.sin(by)],
+        [0,           1, 0],
+        [-np.sin(by), 0, np.cos(by)]
+    ])
+
+    Rz = np.array([
+        [np.cos(cz), -np.sin(cz), 0],
+        [np.sin(cz),  np.cos(cz), 0],
+        [0,           0,          1]
+    ])
+
+    wR2c = Rz @ Ry @ Rx
+    wt2c = np.array([tx, ty, tz])
 
     P1 = K1 @ np.hstack([wR1c.T, -wR1c.T @ wt1c.reshape(3, 1)])
-    P2 = P1  # placeholder
+    P2 = K2 @ np.hstack([wR2c.T, -wR2c.T @ wt2c.reshape(3, 1)])
+    
+    #P1  # placeholder
 
     # Step 4 
     # Attention: This is an invented matrix just to have some input for the drawing functions. You have to compute it properly
